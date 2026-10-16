@@ -27,24 +27,23 @@ You need Node 24.
 
 ```bash
 npm install
-npx aitopia dev --engine-assets <dir>    # play it on http://localhost:3001/, reloading as you edit
-npx aitopia check                        # type-check it the way your editor sees it
+npx aitopia dev          # play it on http://localhost:3001/, reloading as you edit
+npx aitopia check        # type-check it the way your editor sees it
 ```
 
-The engine is the npm package `@bitmagicai/aitopia`. While it is in testing it lives on GitHub
-Packages, so `.npmrc` points the `@bitmagicai` scope there, and installing needs a GitHub token
-with `read:packages` in your user `~/.npmrc`
-(`//npm.pkg.github.com/:_authToken=<token>`). Once it is public on npm as `@bitmagic/aitopia`,
-`.npmrc` goes away.
-
-`--engine-assets` names a folder holding the engine's own files (the character, the animation
-clips, fonts, runtime modules and the template content `world.json` names by `engine-asset:` URL).
-They are not published yet; until they are, every build needs that folder.
+The engine is the npm package `@bitmagicai/aitopia`, and its own files (the character, the
+animation clips, the fonts and the template content `world.json` names by `engine-asset:` URL)
+are `@bitmagicai/engine-assets`, installed under the name the engine looks for,
+`@bitmagic/engine-assets`. The runtime modules (three.js, Rapier, …) come from their own npm
+packages. While both are in testing they live on GitHub Packages, so `.npmrc` points the
+`@bitmagicai` scope there, and installing needs a GitHub token with `read:packages` in your user
+`~/.npmrc` (`//npm.pkg.github.com/:_authToken=<token>`). Once they are public on npm as
+`@bitmagic/aitopia` and `@bitmagic/engine-assets`, `.npmrc` goes away.
 
 ## Build and host it
 
 ```bash
-npx aitopia build site --engine-assets <dir>
+npx aitopia build site
 ```
 
 `site/` is a static site: `index.html` plus the engine's files beside it. It talks to no other
@@ -52,4 +51,5 @@ host, so any static host serves it, GitHub Pages included.
 
 `.github/workflows/pages.yml` does the same on GitHub and deploys the result to
 <https://bitmagicai.github.io/example-game/>. It runs by hand for now (Actions → "Deploy to GitHub
-Pages" → Run workflow), until the engine's files are published.
+Pages" → Run workflow): the repository is private, and GitHub Pages serves a free organization's
+public repositories only.

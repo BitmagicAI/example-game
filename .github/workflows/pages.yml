@@ -1,8 +1,8 @@
 name: Deploy to GitHub Pages
 
 # Builds the game with the open engine (the npm package @bitmagicai/aitopia) and deploys it to
-# GitHub Pages. Manual for now: the engine's own files (the `--engine-assets` folder) are not
-# published yet. Once they are, drop that flag and add `push: branches: [main]` here.
+# GitHub Pages. Manual while the repository is private (Pages serves a free organization's public
+# repositories only); add `push: branches: [main]` here when it goes public.
 on:
   workflow_dispatch:
 
@@ -24,14 +24,14 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: 24
-          # The engine is on GitHub Packages while in testing; drop these two lines once it is
-          # public on npm as @bitmagic/aitopia.
+          # The engine and its files are on GitHub Packages while in testing; drop these two lines
+          # once they are public on npm as @bitmagic/aitopia and @bitmagic/engine-assets.
           registry-url: https://npm.pkg.github.com
           scope: '@bitmagicai'
       - run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: npx aitopia build site --engine-assets engine-assets
+      - run: npx aitopia build site
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
