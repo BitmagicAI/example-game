@@ -1,0 +1,3 @@
+{
+  "extends": "@bitmagicai/aitopia/tsconfig.game.json"
+}

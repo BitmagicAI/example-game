@@ -15,37 +15,40 @@ is needed to run, build or host it.
 | `Gems.ts` | One gem: a spinning, bobbing crystal that the player collects by touching it |
 | `WorldGenerator.ts` | The engine's baseline world generator with one change, marked "Gem Island": the island's shape |
 | `world.json`, `game.json` | The world (terrain, objects, sky, start screen) and the game's settings |
+| `package.json`, `tsconfig.json` | The engine as an npm package, and the TypeScript setup it provides |
 
 Everything else a game needs (loading, the player, the camera, the per-frame loop) comes from the
-engine's baseline game: this folder holds only what Gem Island changes. See "Your own game
-repository" in AItopia's `game/README.md`.
+engine's baseline game in the package: this folder holds only what Gem Island changes. To change
+another baseline file, copy it from `node_modules/@bitmagicai/aitopia/game/src/baseline/` here.
 
 ## Run it
 
-You need Node 24 and pnpm. Clone the engine next to this repository:
+You need Node 24.
 
 ```bash
-git clone https://github.com/BitmagicAI/AItopia.git
-git clone https://github.com/BitmagicAI/example-game.git
-cd AItopia/game
-pnpm install
-pnpm dev:game ../../example-game --engine-assets <dir>
+npm install
+npx aitopia dev --engine-assets <dir>    # play it on http://localhost:3001/, reloading as you edit
+npx aitopia check                        # type-check it the way your editor sees it
 ```
 
-Then open <http://localhost:3001/>. Edit the files in `example-game/`; the page reloads.
+The engine is the npm package `@bitmagicai/aitopia`. While it is in testing it lives on GitHub
+Packages, so `.npmrc` points the `@bitmagicai` scope there, and installing needs a GitHub token
+with `read:packages` in your user `~/.npmrc`
+(`//npm.pkg.github.com/:_authToken=<token>`). Once it is public on npm as `@bitmagic/aitopia`,
+`.npmrc` goes away.
 
 `--engine-assets` names a folder holding the engine's own files (the character, the animation
 clips, fonts, runtime modules and the template content `world.json` names by `engine-asset:` URL).
-Bitmagic does not publish that set yet; AItopia's `game/docs/hosting.md` says what it holds.
+They are not published yet; until they are, every build needs that folder.
 
 ## Build and host it
 
 ```bash
-pnpm build:game ../../example-game ../../gem-island-site --engine-assets <dir>
+npx aitopia build site --engine-assets <dir>
 ```
 
-`gem-island-site/` is a static site: `index.html` plus the engine's files beside it. It talks to no
-other host, so any static host serves it, GitHub Pages included.
+`site/` is a static site: `index.html` plus the engine's files beside it. It talks to no other
+host, so any static host serves it, GitHub Pages included.
 
 `.github/workflows/pages.yml` does the same on GitHub and deploys the result to
 <https://bitmagicai.github.io/example-game/>. It runs by hand for now (Actions → "Deploy to GitHub

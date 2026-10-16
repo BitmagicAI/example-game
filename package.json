@@ -1,0 +1,12 @@
+{
+  "name": "gem-island",
+  "private": true,
+  "dependencies": {
+    "@bitmagicai/aitopia": "^1.0.0-dev.0"
+  },
+  "scripts": {
+    "dev": "aitopia dev",
+    "build": "aitopia build site",
+    "check": "aitopia check"
+  }
+}
