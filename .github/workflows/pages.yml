@@ -1,0 +1,59 @@
+name: Deploy to GitHub Pages
+
+# Builds the game with the open engine (BitmagicAI/AItopia) and deploys it to GitHub Pages.
+# Manual for now: the engine's own files (the `--engine-assets` folder) are not published yet.
+# Once they are, add `push: branches: [main]` here.
+on:
+  workflow_dispatch:
+    inputs:
+      engine_ref:
+        description: AItopia tag or commit to build with
+        required: true
+        default: main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: game
+      - uses: actions/checkout@v4
+        with:
+          repository: BitmagicAI/AItopia
+          ref: ${{ inputs.engine_ref }}
+          path: engine
+          # AItopia is private until its release; drop this line when it is public.
+          token: ${{ secrets.AITOPIA_READ_TOKEN }}
+      - uses: pnpm/action-setup@v5
+        with:
+          version: 10
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: engine/game/.nvmrc
+      - run: pnpm install
+        working-directory: engine/game
+      - run: pnpm build:game ../../game ../../site --engine-assets ../../game/engine-assets
+        working-directory: engine/game
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

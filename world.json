@@ -1,0 +1,399 @@
+{
+  "formatVersion": 1,
+  "worldProfileData": {
+    "characterPoseVersion": 2,
+    "author": "Generated",
+    "playerSpawnPosition": {
+      "x": 0,
+      "y": 0.5,
+      "z": 4
+    },
+    "skyboxUrl": "engine-asset:skyboxes/default-skybox-v1.webp",
+    "worldSeed": 42,
+    "voxelBlockSize": 1,
+    "characterConfig": {
+      "height": 1.5,
+      "walkSpeed": 2,
+      "runSpeed": 5,
+      "fastRunSpeed": 8
+    },
+    "markers": [],
+    "groundWorldSizeX": 80,
+    "groundWorldSizeZ": 80,
+    "customBlockTypes": [
+      {
+        "name": "natural_rock",
+        "displayName": "Natural Rock",
+        "description": "Beautiful natural rock texture with varied gray and brown tones, subtle moss patches, natural weathered cracks, and layered sedimentary details. Has a warm, inviting quality with highlights and shadows that give depth.",
+        "textureUrl": "engine-asset:templates/textures/default-block-v1.png",
+        "sideTextureUrl": null,
+        "textureSize": 16,
+        "createdAt": "2026-02-10T12:46:50.300Z"
+      }
+    ],
+    "hud": {
+      "startScreen": {
+        "imageUrl": "engine-asset:templates/start-screens/standard-3d-v1.webp"
+      }
+    }
+  },
+  "assets": [
+    {
+      "id": "default-tree-1",
+      "name": "voxelTree1",
+      "url": "engine-asset:templates/voxel-v1/tree-variant-1.vxl",
+      "type": "vxl",
+      "size": 249,
+      "boundingBox": {
+        "minX": -1.5,
+        "minY": 0,
+        "minZ": -1.5,
+        "maxX": 1.5,
+        "maxY": 5,
+        "maxZ": 1.5
+      }
+    },
+    {
+      "id": "default-tree-2",
+      "name": "voxelTree2",
+      "url": "engine-asset:templates/voxel-v1/tree-variant-2.vxl",
+      "type": "vxl",
+      "size": 265,
+      "boundingBox": {
+        "minX": -2,
+        "minY": 0,
+        "minZ": -2,
+        "maxX": 2,
+        "maxY": 6,
+        "maxZ": 2
+      }
+    },
+    {
+      "id": "default-tree-3",
+      "name": "voxelTree3",
+      "url": "engine-asset:templates/voxel-v1/tree-variant-3.vxl",
+      "type": "vxl",
+      "size": 217,
+      "boundingBox": {
+        "minX": -1,
+        "minY": 0,
+        "minZ": -1,
+        "maxX": 1,
+        "maxY": 4,
+        "maxZ": 1
+      }
+    },
+    {
+      "id": "default-rock-1",
+      "name": "voxelRock1",
+      "url": "engine-asset:templates/voxel-v1/rock-variant-1.vxl",
+      "type": "vxl",
+      "size": 103,
+      "boundingBox": {
+        "minX": -0.5,
+        "minY": 0,
+        "minZ": -0.5,
+        "maxX": 0.5,
+        "maxY": 0.5,
+        "maxZ": 0.5
+      }
+    },
+    {
+      "id": "default-rock-2",
+      "name": "voxelRock2",
+      "url": "engine-asset:templates/voxel-v1/rock-variant-2.vxl",
+      "type": "vxl",
+      "size": 106,
+      "boundingBox": {
+        "minX": -1,
+        "minY": 0,
+        "minZ": -1,
+        "maxX": 1,
+        "maxY": 1,
+        "maxZ": 1
+      }
+    },
+    {
+      "id": "default-rock-3",
+      "name": "voxelRock3",
+      "url": "engine-asset:templates/voxel-v1/rock-variant-3.vxl",
+      "type": "vxl",
+      "size": 142,
+      "boundingBox": {
+        "minX": -1.5,
+        "minY": 0,
+        "minZ": -1.5,
+        "maxX": 1.5,
+        "maxY": 1.5,
+        "maxZ": 1.5
+      }
+    },
+    {
+      "id": "asset_1770810581584_k3eudl",
+      "name": "voxelRock2",
+      "url": "engine-asset:templates/voxel-v1/voxel-rock-2.vxl",
+      "type": "vxl",
+      "size": 169,
+      "boundingBox": {
+        "minX": -0.25,
+        "minY": 0,
+        "minZ": -0.25,
+        "maxX": 1.25,
+        "maxY": 1,
+        "maxZ": 1
+      },
+      "flattenTerrain": false,
+      "voxelSize": 0.25,
+      "boundingBoxInMeters": true
+    },
+    {
+      "id": "asset_1770810581606_2kxbgf",
+      "name": "voxelRock3",
+      "url": "engine-asset:templates/voxel-v1/voxel-rock-3.vxl",
+      "type": "vxl",
+      "size": 209,
+      "boundingBox": {
+        "minX": -0.25,
+        "minY": 0,
+        "minZ": -0.25,
+        "maxX": 1.75,
+        "maxY": 2,
+        "maxZ": 1.25
+      },
+      "flattenTerrain": false,
+      "voxelSize": 0.25,
+      "boundingBoxInMeters": true
+    },
+    {
+      "id": "asset_1770810581606_17cauv",
+      "name": "voxelRock1",
+      "url": "engine-asset:templates/voxel-v1/voxel-rock-1.vxl",
+      "type": "vxl",
+      "size": 130,
+      "boundingBox": {
+        "minX": -0.25,
+        "minY": 0,
+        "minZ": 0,
+        "maxX": 0.75,
+        "maxY": 0.75,
+        "maxZ": 0.75
+      },
+      "flattenTerrain": false,
+      "voxelSize": 0.25,
+      "boundingBoxInMeters": true
+    }
+  ],
+  "environmentObjects": [
+    {
+      "id": "default_tree_1",
+      "type": "voxelTree",
+      "assetId": "default-tree-1",
+      "position": {
+        "x": 14,
+        "y": 0,
+        "z": 10
+      },
+      "rotation": {
+        "x": 0,
+        "y": 4.71238898038469,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "placeOnTerrain": true
+    },
+    {
+      "id": "default_tree_2",
+      "type": "voxelTree",
+      "assetId": "default-tree-1",
+      "position": {
+        "x": 1,
+        "y": 0,
+        "z": -19
+      },
+      "rotation": {
+        "x": 0,
+        "y": 3.141592653589793,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "placeOnTerrain": true
+    },
+    {
+      "id": "default_tree_5",
+      "type": "voxelTree",
+      "assetId": "default-tree-2",
+      "position": {
+        "x": -7,
+        "y": 0,
+        "z": -13
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "placeOnTerrain": true
+    },
+    {
+      "id": "default_tree_9",
+      "type": "voxelTree",
+      "assetId": "default-tree-3",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 14
+      },
+      "rotation": {
+        "x": 0,
+        "y": 3.141592653589793,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "placeOnTerrain": true
+    },
+    {
+      "id": "default_tree_10",
+      "type": "voxelTree",
+      "assetId": "default-tree-3",
+      "position": {
+        "x": -12,
+        "y": 0,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "placeOnTerrain": true
+    },
+    {
+      "id": "default_tree_12",
+      "type": "voxelTree",
+      "assetId": "default-tree-3",
+      "position": {
+        "x": 17,
+        "y": 0,
+        "z": -15
+      },
+      "rotation": {
+        "x": 0,
+        "y": 4.71238898038469,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "placeOnTerrain": true
+    },
+    {
+      "id": "default_tree_13",
+      "type": "voxelTree",
+      "assetId": "default-tree-2",
+      "position": {
+        "x": 18,
+        "y": 0,
+        "z": -4
+      },
+      "rotation": {
+        "x": 0,
+        "y": 3.141592653589793,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "placeOnTerrain": true
+    },
+    {
+      "id": "default_rock_0",
+      "type": "voxelRock",
+      "assetId": "default-rock-2",
+      "position": {
+        "x": 17,
+        "y": 0,
+        "z": 5
+      },
+      "rotation": {
+        "x": 0,
+        "y": 3.141592653589793,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "placeOnTerrain": true
+    },
+    {
+      "id": "default_rock_2",
+      "type": "voxelRock",
+      "assetId": "default-rock-2",
+      "position": {
+        "x": 8,
+        "y": 0,
+        "z": 20
+      },
+      "rotation": {
+        "x": 0,
+        "y": 1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "placeOnTerrain": true
+    },
+    {
+      "id": "default_rock_5",
+      "type": "voxelRock",
+      "assetId": "default-rock-2",
+      "position": {
+        "x": 11,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "placeOnTerrain": true
+    }
+  ],
+  "gameId": "RY4XEVGD22FU"
+}

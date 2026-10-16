@@ -1,0 +1,9 @@
+{
+  "gameId": "TPLSTANDARD3",
+  "gameName": "Gem Island",
+  "gameDescription": "Collect every gem on the island before the timer runs out. An example game built on the Bitmagic engine.",
+  "characterUrl": "",
+  "thumbnailUrl": "engine-asset:templates/thumbnails/standard-3d-v1.jpg",
+  "environmentObjectsGeneratedProcedurally": false,
+  "primaryPlatform": "desktop"
+}
