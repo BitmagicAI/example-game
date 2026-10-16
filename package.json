@@ -2,8 +2,8 @@
   "name": "gem-island",
   "private": true,
   "dependencies": {
-    "@bitmagic/engine-assets": "npm:@bitmagicai/engine-assets@^1.0.0",
-    "@bitmagicai/aitopia": "^1.0.0-dev.1"
+    "@bitmagic/engine-assets": "npm:@bitmagicai/engine-assets@^1.0.1",
+    "@bitmagicai/aitopia": "^1.0.0-dev.2"
   },
   "scripts": {
     "dev": "aitopia dev",

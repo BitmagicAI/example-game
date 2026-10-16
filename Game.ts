@@ -1,6 +1,6 @@
 // Gem Island: run around a small island and collect every gem before the timer runs out.
 //
-// The game is a small subclass of VoxelGameBase (./VoxelGameBase.ts), which loads the
+// The game is a small subclass of GameBase (./GameBase.ts), which loads the
 // world, the player, the camera and the controller, and drives them every frame. This
 // file only adds the gems, the HUD and the win / lose rules on top, through the base
 // class's protected hooks. The island itself is shaped in WorldGenerator.ts
@@ -10,7 +10,7 @@ import type { WorldProfileData, EngineLike, GameData } from 'types/game.js';
 import { getGameStateManager, GameState } from 'engine/core/GameStateManager.js';
 import { gameplayNowMs } from 'engine/core/frame/GameplayTimers.js';
 import { getVisualEffects } from 'engine/effects/index.js';
-import { VoxelGameBase } from './VoxelGameBase.js';
+import { GameBase } from './GameBase.js';
 import { Gem } from './Gems.js';
 
 /** Seconds the player has to collect every gem. */
@@ -22,8 +22,8 @@ const GEM_SPOTS: ReadonlyArray<readonly [number, number]> = [
     [-8, -20], [-12, -8], [-20, 3], [-14, 14], [4, 20],
 ];
 
-/** The engine constructs the `VoxelGame` export of this file once per load (and again on Play Again). */
-export class VoxelGame extends VoxelGameBase {
+/** The engine constructs the `Game` export of this file once per load (and again on Play Again). */
+export class Game extends GameBase {
     private gems: Gem[] = [];
     private collectedCount = 0;
     private startedAtMs: number | null = null;
