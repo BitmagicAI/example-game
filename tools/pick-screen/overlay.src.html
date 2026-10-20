@@ -1,0 +1,426 @@
+<!-- tor-rs:head:begin (built by tools/pick-screen/build.mjs from tools/pick-screen/overlay.src.html: edit THAT file and run the tool, not tor/PickScreenMarkup.ts) -->
+<!-- Trick or Roll PICK YOUR ROLLER (styles). Static on purpose: it paints with the HTML, before the game bundle runs, and doubles as the loading screen. -->
+<!-- The font is its own element: the game's menus, HUD and panels use it too ('TOR Lilita' first in their font stacks), so it stays when the screen below is dropped. It also means the
+     iOS app, which has no network, draws the real face instead of a fallback. -->
+<style id="tor-font-style">
+%%FONT%%
+</style>
+<style id="tor-rs-style">
+#tor-rs {
+    --ink: #1b0e26; --cream: #fff6dc; --gold: #ffd27a; --orange: #ff8a1f; --violet: #4a2670; --mute: #d9c4f5;
+    --vh: 1vh; --g: clamp(8px, 1.3vw, 22px); --gv: clamp(6px, calc(var(--vh) * 1.6), 18px);
+    /* the height budget: head + cards + blurb + foot must fit, so the cards are sized from what is left (the label sits ON the portrait, so a card is its image plus its 5 px borders) */
+    --hh: clamp(52px, calc(var(--vh) * 14), 130px); --bh: clamp(46px, calc(var(--vh) * 9), 74px); --fh: clamp(64px, calc(var(--vh) * 12), 112px);
+    --lbl: clamp(28px, calc(var(--vh) * 5.2), 46px);
+    --cols: 4; --rows: 1;
+    --avail: calc(var(--vh) * 100 - 20px - var(--hh) - var(--bh) - var(--fh) - 3 * var(--gv) - 14px);
+    --side: 56px;
+    --cw: min(calc((100vw - var(--side) - (var(--cols) - 1) * var(--g)) / var(--cols)), calc(((var(--avail) - (var(--rows) - 1) * var(--g)) / var(--rows) - 10px) * .75 + 10px), calc(var(--vh) * 44), 420px);
+    position: fixed; inset: 0; z-index: 9500; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--gv);
+    padding: max(10px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+    color: var(--cream); background: #1b0d3a;
+    font-family: 'TOR Lilita', 'Lilita One', 'Arial Rounded MT Bold', 'Arial Black', system-ui, sans-serif; font-weight: 400;
+    -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+    transition: opacity .3s ease;
+}
+@supports (height: 100dvh) { #tor-rs { --vh: 1dvh; } }
+@media (max-aspect-ratio: 9/10) { #tor-rs { --cols: 2; --rows: 2; --side: 40px; --hh: clamp(52px, calc(var(--vh) * 8.5), 74px); --bh: clamp(46px, calc(var(--vh) * 8), 66px); --fh: 116px; } }
+/* a phone on its side: title and subtitle on one line, a slim description, everything else as tall as it can be */
+@media (max-height: 480px) {
+    #tor-rs { --bh: 40px; --hh: 40px; --fh: 64px; --gv: 6px; }
+    #tor-rs .tor-blurb { font-size: 14px; padding: 0 12px; border-width: 3px; }
+    #tor-rs .tor-head { flex-direction: row; align-items: baseline; gap: 14px; }
+    #tor-rs .tor-title { font-size: 34px; } #tor-rs .tor-sub { font-size: 17px; }
+}
+#tor-rs.tor-out { opacity: 0; pointer-events: none; }
+#tor-rs * { box-sizing: border-box; }
+/* ---- backdrop: transform / opacity animations only, so it keeps moving through long tasks ---- */
+.tor-bg, .tor-bg * { position: absolute; pointer-events: none; }
+.tor-bg { inset: 0; z-index: -1; overflow: hidden;
+    background: radial-gradient(90% 60% at 50% 108%, rgba(255, 138, 74, .55), rgba(255, 138, 74, 0) 70%), linear-gradient(180deg, #170a33 0%, #33195c 34%, #6a2f86 64%, #b8508a 88%, #ff9a5a 100%); }
+.tor-moon { width: clamp(90px, 16vmin, 190px); aspect-ratio: 1; right: 9%; top: 7%; border-radius: 50%;
+    background: radial-gradient(circle at 38% 34%, #fffbe6 0, #ffe9a8 55%, #f7c866 100%); box-shadow: 0 0 60px 18px rgba(255, 226, 150, .38), 0 0 0 5px rgba(27, 14, 38, .55); animation: tor-bob 9s ease-in-out infinite alternate; }
+.tor-moon::before, .tor-moon::after { content: ''; position: absolute; border-radius: 50%; background: rgba(214, 160, 84, .32); }
+.tor-moon::before { width: 22%; height: 22%; left: 24%; top: 44%; } .tor-moon::after { width: 14%; height: 14%; left: 58%; top: 26%; }
+.tor-cl { width: 150%; height: 46%; left: -25%; opacity: .5; will-change: transform; }
+.tor-cl1 { top: 6%; background: radial-gradient(26% 50% at 28% 50%, #4a2a78 0, rgba(74, 42, 120, 0) 100%), radial-gradient(20% 40% at 70% 56%, #5a2f86 0, rgba(90, 47, 134, 0) 100%); animation: tor-drift 38s ease-in-out infinite alternate; }
+.tor-cl2 { top: 30%; opacity: .34; background: radial-gradient(24% 46% at 54% 50%, #8a3f90 0, rgba(138, 63, 144, 0) 100%), radial-gradient(18% 36% at 14% 40%, #6a3590 0, rgba(106, 53, 144, 0) 100%); animation: tor-drift 52s ease-in-out infinite alternate-reverse; }
+/* the pumpkin patch: two hills with a rim of last light, and a few pumpkins on them */
+.tor-hill { border-radius: 50% 50% 0 0 / 100% 100% 0 0; background: linear-gradient(180deg, #2c1350, #170a2c); box-shadow: inset 0 4px 0 rgba(255, 150, 80, .5); }
+.tor-hill1 { left: -12%; bottom: -3%; width: 66%; height: 22%; } .tor-hill2 { right: -14%; bottom: -5%; width: 72%; height: 17%; background: linear-gradient(180deg, #24103f, #120823); }
+.tor-pk { width: clamp(30px, 6.4vmin, 74px); aspect-ratio: 1.12; border-radius: 50% / 46%; background: radial-gradient(ellipse at 38% 30%, #ffc45c 0, #f58a24 52%, #c9531a 100%); box-shadow: 0 0 0 3px rgba(27, 14, 38, .85); }
+.tor-pk::before { content: ''; position: absolute; left: 50%; top: 4%; bottom: 4%; width: 34%; margin-left: -17%; border: 2px solid rgba(122, 44, 8, .55); border-width: 0 2px; border-radius: 50%; }
+.tor-pk::after { content: ''; position: absolute; left: 44%; top: -13%; width: 12%; height: 20%; background: #3f6a2a; border-radius: 30% 30% 0 0; box-shadow: 0 0 0 2px rgba(27, 14, 38, .85); }
+.tor-pk1 { left: 1.5%; bottom: 12%; } .tor-pk2 { left: 7.5%; bottom: 7%; width: clamp(20px, 4.2vmin, 48px); } .tor-pk3 { right: 2.5%; bottom: 10%; width: clamp(26px, 5.4vmin, 64px); } .tor-pk4 { right: 9%; bottom: 5.5%; width: clamp(18px, 3.6vmin, 40px); }
+@media (max-aspect-ratio: 9/10) { .tor-pk { display: none; } .tor-hill1 { height: 11%; } .tor-hill2 { height: 8%; } .tor-moon { right: -5%; top: 13%; } }
+.tor-bat { width: clamp(20px, 3.4vmin, 40px); aspect-ratio: 5 / 3; left: -6%; background: #12061f; will-change: transform;
+    clip-path: polygon(50% 34%, 58% 12%, 66% 34%, 100% 20%, 86% 62%, 72% 52%, 60% 84%, 50% 60%, 40% 84%, 28% 52%, 14% 62%, 0 20%, 34% 34%, 42% 12%); }
+.tor-bat1 { top: 16%; animation: tor-fly 19s linear infinite; }
+.tor-bat2 { top: 30%; animation: tor-fly 27s linear infinite 6s; transform: scale(.7); }
+.tor-bat3 { top: 10%; animation: tor-fly 23s linear infinite 12s; transform: scale(.55); }
+.tor-dots { inset: 0; opacity: .55; background: radial-gradient(circle at 50% 50%, rgba(18, 6, 34, .7) 1.5px, transparent 2.3px) 0 0 / 9px 9px;
+    -webkit-mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, .55) 30%, transparent 66%); mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, .55) 30%, transparent 66%); }
+.tor-vig { inset: 0; box-shadow: inset 0 0 18vmin rgba(10, 2, 24, .78); }
+@keyframes tor-drift { from { transform: translate3d(-7%, 0, 0); } to { transform: translate3d(7%, 3%, 0); } }
+@keyframes tor-bob { from { transform: translate3d(0, -1vmin, 0); } to { transform: translate3d(0, 1.2vmin, 0); } }
+@keyframes tor-fly { from { transform: translate3d(0, 0, 0); } 25% { transform: translate3d(28vw, -3vmin, 0); } 55% { transform: translate3d(62vw, 2vmin, 0); } 80% { transform: translate3d(92vw, -2vmin, 0); } to { transform: translate3d(118vw, 0, 0); } }
+/* ---- content ---- */
+.tor-head { display: flex; flex-direction: column; align-items: center; justify-content: center; height: var(--hh); gap: 2px; text-align: center; }
+.tor-title { margin: 0; font-size: clamp(30px, min(8.2vw, calc(var(--hh) * .68)), 88px); font-weight: 400; line-height: 1; color: var(--gold); letter-spacing: 1px; transform: rotate(-2deg);
+    text-shadow: 0 6px 0 var(--ink), 4px 0 0 var(--ink), -4px 0 0 var(--ink), 0 -4px 0 var(--ink), 3px 3px 0 var(--ink), -3px 3px 0 var(--ink), 3px -3px 0 var(--ink), -3px -3px 0 var(--ink); }
+.tor-sub { margin: 0; font-size: clamp(14px, min(2.6vw, calc(var(--hh) * .22)), 26px); color: #e8d6ff; text-shadow: 0 2px 0 var(--ink); letter-spacing: .5px; }
+.tor-cards { display: grid; grid-template-columns: repeat(var(--cols), var(--cw)); gap: var(--g); justify-content: center; padding-top: 12px; }
+.tor-card { all: unset; box-sizing: border-box; position: relative; display: block; width: var(--cw); overflow: hidden; cursor: pointer;
+    border: 5px solid var(--ink); border-radius: 22px; background: var(--violet); box-shadow: 0 8px 0 var(--ink);
+    transform: rotate(var(--r, 0deg)); transition: transform .12s ease, box-shadow .12s ease, opacity .25s ease; -webkit-tap-highlight-color: transparent; }
+.tor-card:nth-child(1) { --r: -1.2deg; } .tor-card:nth-child(2) { --r: .9deg; } .tor-card:nth-child(3) { --r: -.7deg; } .tor-card:nth-child(4) { --r: 1.2deg; }
+.tor-card img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; filter: saturate(.8) brightness(.78); transition: filter .15s ease; pointer-events: none; }
+.tor-name { position: absolute; left: 0; right: 0; bottom: 0; height: var(--lbl); display: flex; align-items: center; justify-content: center; font-size: clamp(15px, calc(var(--lbl) * .6), 28px); line-height: 1; color: var(--cream); text-shadow: 0 2px 0 var(--ink);
+    background: linear-gradient(#7a3fb8, #4a2378); border-top: 4px solid var(--ink); transition: background .15s ease, color .15s ease; }
+.tor-card:hover { transform: translateY(-3px) rotate(var(--r, 0deg)); } .tor-card:hover img { filter: saturate(.92) brightness(.9); }
+.tor-card.is-sel { z-index: 2; transform: translateY(-8px) rotate(-1deg) scale(1.04); box-shadow: 0 12px 0 var(--ink), 0 0 0 4px var(--tint), 0 0 38px 4px var(--tint); }
+.tor-card.is-sel img { filter: none; }
+.tor-card.is-sel .tor-name { background: linear-gradient(#ffb03a, #f0701a); color: #2a1240; text-shadow: none; }
+.tor-card:focus-visible { outline: 4px solid var(--gold); outline-offset: 3px; }
+.tor-ok { position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border-radius: 50%; background: var(--orange); border: 4px solid var(--ink); display: none; }
+.tor-ok::after { content: ''; position: absolute; left: 7px; top: 3px; width: 8px; height: 13px; border: solid #2a1240; border-width: 0 4px 4px 0; transform: rotate(40deg); }
+.tor-card.is-sel .tor-ok { display: block; }
+/* a click on a card: it hops, and its line pops into the description */
+.tor-card.pop { animation: tor-hop .34s ease-out; }
+@keyframes tor-hop { 0% { transform: translateY(-8px) rotate(-1deg) scale(1.04); } 40% { transform: translateY(-17px) rotate(2deg) scale(1.1); } 100% { transform: translateY(-8px) rotate(-1deg) scale(1.04); } }
+.tor-blurb.pop span { animation: tor-say .28s ease-out; }
+@keyframes tor-say { from { opacity: 0; transform: translateY(7px) scale(.96); } to { opacity: 1; transform: none; } }
+.tor-blurb { margin: 0; height: var(--bh); width: min(760px, 92vw); display: flex; align-items: center; justify-content: center; padding: 0 20px; text-align: center; font-size: clamp(14px, min(2.3vw, calc(var(--vh) * 3.1)), 22px); line-height: 1.15;
+    color: var(--cream); text-shadow: 0 2px 0 var(--ink); background: rgba(27, 14, 38, .66); border: 4px solid var(--ink); border-radius: 18px; box-shadow: 0 5px 0 var(--ink); }
+.tor-blurb b { color: var(--gold); font-weight: 400; margin-right: .35em; }
+.tor-foot { display: flex; align-items: center; justify-content: center; gap: clamp(12px, 3vw, 34px); flex-wrap: wrap; height: var(--fh); }
+.tor-stat { display: flex; flex-direction: column; gap: 6px; width: min(300px, 70vw); }
+.tor-bar { position: relative; height: 16px; overflow: hidden; border: 4px solid var(--ink); border-radius: 12px; background: rgba(27, 14, 38, .72); }
+.tor-bar i { position: absolute; inset: 0; background: linear-gradient(#ffd27a, #ff8a1f); transform-origin: 0 50%; transform: scaleX(0); transition: transform .2s ease-out; }
+#tor-rs.is-indet .tor-bar i { transform: none; width: 34%; animation: tor-slide 1.3s ease-in-out infinite alternate; }
+@keyframes tor-slide { from { transform: translateX(0); } to { transform: translateX(196%); } }
+.tor-msg { font-size: clamp(14px, 1.9vw, 18px); color: var(--mute); text-shadow: 0 2px 0 var(--ink); min-height: 1.2em; }
+.tor-go { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; gap: .55em; padding: .32em 1.05em .4em; font-size: clamp(26px, min(4.4vw, calc(var(--vh) * 5.6)), 44px); line-height: 1.1;
+    color: #2a1240; background: linear-gradient(#ffb03a, #f0701a); border: 6px solid var(--ink); border-radius: 40px; box-shadow: 0 8px 0 var(--ink), 0 0 0 3px rgba(255, 255, 255, .4) inset;
+    transform: rotate(-1deg); transition: transform .1s ease, filter .15s ease; text-shadow: 0 2px 0 rgba(255, 255, 255, .35); }
+.tor-go::after { content: ''; width: 0; height: 0; border-left: .62em solid currentColor; border-top: .4em solid transparent; border-bottom: .4em solid transparent; }
+.tor-go:hover { transform: rotate(-1deg) scale(1.05); } .tor-go:active { transform: rotate(-1deg) translateY(4px); box-shadow: 0 4px 0 var(--ink), 0 0 0 3px rgba(255, 255, 255, .4) inset; }
+.tor-go:focus-visible { outline: 4px solid var(--cream); outline-offset: 4px; }
+#tor-rs.is-ready:not(.is-locked) .tor-go { animation: tor-pulse 1.1s ease-in-out infinite alternate; }
+@keyframes tor-pulse { from { transform: rotate(-1deg) scale(1); } to { transform: rotate(-1deg) scale(1.06); } }
+.tor-hint { display: none; position: absolute; left: 18px; bottom: max(8px, env(safe-area-inset-bottom)); margin: 0; text-align: left; font-size: 14px; color: var(--mute); text-shadow: 0 2px 0 var(--ink); }
+@media (hover: hover) and (pointer: fine) and (min-height: 481px) { .tor-hint { display: block; } }
+/* ROLL pressed while the stage is still loading: the choice is locked, the others step back, the game starts by itself when it is ready */
+#tor-rs.is-locked .tor-card:not(.is-sel) { opacity: .26; transform: scale(.93) rotate(var(--r, 0deg)); pointer-events: none; }
+#tor-rs.is-locked .tor-go { pointer-events: none; filter: saturate(.55) brightness(.9); animation: none; }
+#tor-rs.is-locked .tor-go::after { display: none; }
+@media (prefers-reduced-motion: reduce) { #tor-rs *, #tor-rs { animation: none !important; transition: none !important; } }
+</style>
+<!-- tor-rs:head:end -->
+<!-- tor-rs:body:begin (built by tools/pick-screen/build.mjs from tools/pick-screen/overlay.src.html: edit THAT file and run the tool, not tor/PickScreenMarkup.ts) -->
+<!-- Trick or Roll PICK YOUR ROLLER: the first screen. Meet the rollers (a card only SELECTS it and shows its line) while the game loads behind it; the ROLL button (Enter / Space, gamepad A)
+     is the game's PLAY button, there is no other: as soon as everything is loaded it calls the engine's own start, engine.startGame(). ROLL while the game still loads locks the choice and
+     the game starts by itself when it is ready. While you look around, the game loads behind this screen (the page fetches its menu stage as soon as the engine starts).
+     ?select=0, the creator's editor, ?stage=<name> and desktop ?autostart=1 skip it (the engine's own start screen runs as before).
+     ?pick=<id> selects that roller and presses ROLL once ready (harnesses); a webdriver (a headless test) presses ROLL 3 s after ready unless ?select=1.
+     Game side: tor/CharacterSelect.ts, which puts this screen on the page. After a stage URL, roster or portrait change: node tools/pick-screen/build.mjs -->
+<script>
+/* The iOS app serves the page from bmapp:// (and has no network of its own to rely on). Two things differ there, before anything else runs:
+   - the page is told to draw under the Dynamic Island, the rounded corners and the home indicator, so that env(safe-area-inset-*) reports them (the screen below and the game's own UI keep clear of them:
+     tor/safeArea.ts); a browser tab letterboxes by itself and is left alone;
+   - the engine's request to Google Fonts for the HUD face is dropped before it is made: the face ('TOR Lilita') is embedded above and comes first in every font stack, so the app asks nobody for anything. */
+(function () {
+    try {
+        if (location.protocol !== 'bmapp:') return;
+        var m = document.querySelector('meta[name="viewport"]');
+        if (m && !/viewport-fit/.test(m.content)) m.content += ', viewport-fit=cover';
+        var add = document.head.appendChild;
+        document.head.appendChild = function (n) {
+            if (n && n.nodeName === 'LINK' && /^https?:\/\/fonts\.(googleapis|gstatic)\.com\//.test(n.href || '')) return n;
+            return add.call(this, n);
+        };
+    } catch (e) { /* ignore */ }
+})();
+</script>
+<div id="tor-rs" class="is-indet" role="dialog" aria-label="Choose your roller">
+    <div class="tor-bg" aria-hidden="true">
+        <div class="tor-cl tor-cl1"></div><div class="tor-cl tor-cl2"></div><div class="tor-moon"></div>
+        <div class="tor-hill tor-hill1"></div><div class="tor-hill tor-hill2"></div>
+        <div class="tor-pk tor-pk1"></div><div class="tor-pk tor-pk2"></div><div class="tor-pk tor-pk3"></div><div class="tor-pk tor-pk4"></div>
+        <div class="tor-bat tor-bat1"></div><div class="tor-bat tor-bat2"></div><div class="tor-bat tor-bat3"></div>
+        <div class="tor-dots"></div><div class="tor-vig"></div>
+    </div>
+    <div class="tor-head"><h1 class="tor-title">Trick or Roll</h1><p class="tor-sub">Pick your roller</p></div>
+    <div class="tor-cards" role="radiogroup" aria-label="Rollers">
+%%CARDS%%
+    </div>
+    <p class="tor-blurb" aria-live="polite"></p>
+    <div class="tor-foot">
+        <div class="tor-stat" role="status" aria-live="polite"><div class="tor-bar"><i></i></div><span class="tor-msg">Getting the stage ready&hellip;</span></div>
+        <button class="tor-go" type="button">LET'S ROLL!</button>
+    </div>
+    <p class="tor-hint">&larr; &rarr; choose &middot; Enter to roll</p>
+</div>
+<script type="application/json" id="tor-rs-cfg">%%CONFIG%%</script>
+<script>
+(function () {
+    'use strict';
+    var root = document.getElementById('tor-rs');
+    if (!root) return;
+    var q = null;
+    try { q = new URLSearchParams(location.search); } catch (e) { /* very old browser: no screen */ }
+    function drop() {
+        var st = document.getElementById('tor-rs-style');
+        if (root.parentNode) root.parentNode.removeChild(root);
+        if (st && st.parentNode) st.parentNode.removeChild(st);
+    }
+    // mirrors engine/engine/isMobileRuntime.ts (the engine honours ?autostart=1 on desktop only)
+    function isMobile() {
+        try {
+            var pf = q.get('platform');
+            if (pf === 'mobile') return true;
+            if (pf === 'desktop') return false;
+            var ua = navigator.userAgent, touch = navigator.maxTouchPoints > 0;
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)) return true;
+            if (/Macintosh/i.test(ua) && touch) return true;
+            return touch && screen.width < 1366 && screen.height < 1366 && matchMedia('(pointer: coarse)').matches;
+        } catch (e) { return false; }
+    }
+    // the creator's editor, ?stage= (practice / test URLs), desktop instant play and the A/B switch keep the engine's own start screen
+    if (!q || q.get('source') === 'creator' || q.get('select') === '0' || q.has('stage') || (q.get('autostart') === '1' && !isMobile())) { drop(); return; }
+    var CFG;
+    try { CFG = JSON.parse(document.getElementById('tor-rs-cfg').textContent); } catch (e) { drop(); return; }
+    var CH = CFG.characters, IDS = CH.map(function (c) { return c.id; });
+    var cards = [].slice.call(root.querySelectorAll('.tor-card'));
+    var msg = root.querySelector('.tor-msg'), bar = root.querySelector('.tor-bar i'), blurb = root.querySelector('.tor-blurb'), goBtn = root.querySelector('.tor-go');
+    var pick = IDS[0];
+    try { var sv = JSON.parse(localStorage.getItem(CFG.saveKey) || 'null'); if (sv && IDS.indexOf(sv.character) >= 0) pick = sv.character; } catch (e) { /* storage blocked */ }
+    var qp = q.get('pick'), manual = q.get('select') === '1';
+    if (qp && IDS.indexOf(qp) >= 0) pick = qp; else qp = null;
+    // automation: ?pick=<id> selects that animal and presses ROLL the moment the game is ready; a webdriver (a headless test) with neither presses ROLL 3 s after ready.
+    // ?select=1 = a harness that presses ROLL itself (tools/harness.mjs openGame).
+    var autoNow = !!(qp && !manual), autoLater = !!(navigator.webdriver && !qp && !manual);
+
+    // ---- boot prefetch: our own downloads (see "WHEN" at the bottom). Stage files are handed to StageView through window.__torPre; the rest warms the HTTP cache.
+    var pre = (window.__torPre = window.__torPre || {});
+    var files = {}, groupA = [], started = false;
+    function file(u, w, keep) { return files[u] || (files[u] = { u: u, w: w || 300000, loaded: 0, total: w || 300000, done: false, keep: !!keep, p: null }); }
+    function fetchFile(f, low) {
+        if (f.p) return f.p;
+        f.p = fetch(f.u, low ? { priority: 'low' } : undefined).then(function (r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            // content-length counts the bytes on the WIRE; the stream below yields DECODED bytes. The stage GLBs are stored Brotli-encoded (Content-Encoding: br), so with an encoding the header
+            // says nothing about this stream: the total comes from the GLB's own header instead (bytes 8-11 = the file length), and `w` (world.json's size) stays the estimate until then.
+            var len = Number(r.headers.get('content-length')) || 0;
+            if (len && !r.headers.get('content-encoding')) f.total = len;
+            if (!r.body || !r.body.getReader) return r.arrayBuffer();
+            var rd = r.body.getReader(), parts = [], got = 0;
+            function glbTotal() {
+                var h = new Uint8Array(12), o = 0;
+                for (var k = 0; k < parts.length && o < 12; k++) { var n = Math.min(12 - o, parts[k].length); h.set(parts[k].subarray(0, n), o); o += n; }
+                var dv = new DataView(h.buffer);
+                if (dv.getUint32(0, true) === 0x46546C67 && dv.getUint32(8, true) > 0) f.total = dv.getUint32(8, true);
+            }
+            function pump() {
+                return rd.read().then(function (x) {
+                    if (x.done) { var out = new Uint8Array(got), o = 0; for (var i = 0; i < parts.length; i++) { out.set(parts[i], o); o += parts[i].length; } return out.buffer; }
+                    parts.push(x.value); got += x.value.length; if (!f.hdr && got >= 12) { f.hdr = 1; glbTotal(); } f.loaded = got; render(); return pump();
+                });
+            }
+            return pump();
+        }).then(function (b) { f.done = true; f.loaded = f.total = f.total || b.byteLength; render(); return f.keep ? b : null; },
+                function (e) { f.done = true; f.failed = true; f.loaded = f.total; render(); console.warn('[pick] prefetch failed', f.u, e && e.message); return null; });
+        if (f.keep) pre[f.u] = f.p;
+        return f.p;
+    }
+    var U = CFG.urls;
+    // What the screen downloads for the game, and nothing else: the menu stage (the biggest thing the game awaits before it can start; the game picks the bytes up from window.__torPre,
+    // so it is one download) when the engine starts (see "WHEN" at the bottom), and, once the game is ready, the first stage of the first course. Everything else the game loads
+    // itself and better: it fetches the sky and the animal (also the one you select while you browse: CharacterSelect.ts previews it) the moment it needs them, and a second request
+    // for a file that is still in flight downloads it twice (measured: the animal took 1.5 s instead of 0.6 s).
+    function startPrefetch() {
+        if (started) return;
+        started = true;
+        groupA = U.menuStage ? [file(U.menuStage.u, U.menuStage.w, true)] : [];
+        groupA.forEach(function (f) { fetchFile(f); });
+        render();
+    }
+    // the first stage is only needed after ROLL + CHALLENGE, seconds away: it waits a moment after ready so it does not share the link with the animal the game is still downloading
+    function prefetchAfterReady() { if (U.firstStage) setTimeout(function () { fetchFile(file(U.firstStage.u, U.firstStage.w, true), true); }, 1200); }
+    function preFraction() {
+        if (!groupA.length) return 1;
+        var l = 0, t = 0;
+        for (var i = 0; i < groupA.length; i++) { l += Math.min(groupA[i].loaded, groupA[i].total); t += groupA[i].total; }
+        return t ? l / t : 1;
+    }
+
+    // ---- state + contract with tor/CharacterSelect.ts (v1): a card (or the arrows) only SELECTS (`pick`); ROLL (button, Enter / Space, gamepad A) sets `confirmed` and calls
+    // `start()`, which the game sets once it has loaded: it returns true when the game started right there, inside the press (engine.startGame() called inside the gesture).
+    var subs = [], engF = 0, shown = 0, ready = false, going = false, gone = false, launched = false, failed = false, lastTxt = '', lastBlurb = '', lastSel = -1, bootAt = performance.now();
+    var api = window.__torRS = {
+        v: 1, pick: pick, confirmed: false, attached: false, start: null, urls: U,
+        on: function (cb) { subs.push(cb); },
+        ready: function () { ready = true; render(); prefetchAfterReady(); if (autoNow) startPress(false); else if (autoLater) setTimeout(function () { if (!api.confirmed) startPress(false); }, 3000); },
+        going: function () { going = true; render(); },
+        dismiss: function () { dismiss(false); }
+    };
+    // the engine's LoadProgress reports every phase here (window.__bmBoot is its static-shell hook)
+    var prev = window.__bmBoot;
+    window.__bmBoot = {
+        set: function (f, l) { engineUp(); if (typeof f === 'number' && f > engF) { engF = f; render(); } if (prev && prev.set) try { prev.set(f, l); } catch (e) { /* ignore */ } },
+        handoff: function () { if (prev && prev.handoff) try { prev.handoff(); } catch (e) { /* ignore */ } }
+    };
+    // the game's own script (or one of its libraries) could not be fetched: say so instead of loading forever
+    window.addEventListener('error', function (e) {
+        var t = e && e.target;
+        if (!failed && !going && t && t.tagName === 'SCRIPT') { failed = true; render(); }
+    }, true);
+    // restart a one-shot CSS animation
+    function popEl(el) { if (!el) return; el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+    function render() {
+        var sel = IDS.indexOf(api.pick);
+        for (var i = 0; i < cards.length; i++) {
+            var on = i === sel;
+            cards[i].classList.toggle('is-sel', on);
+            cards[i].setAttribute('aria-checked', on ? 'true' : 'false');
+            cards[i].tabIndex = on ? 0 : -1;
+        }
+        if (sel !== lastSel) { if (lastSel >= 0) { popEl(cards[sel]); popEl(blurb); } lastSel = sel; }
+        var c = CH[sel];
+        if (c) { root.style.setProperty('--tint', c.tint); var b = '<span><b>' + c.name + '</b>' + c.blurb + '</span>'; if (b !== lastBlurb) { blurb.innerHTML = b; lastBlurb = b; } }
+        root.classList.toggle('is-locked', api.confirmed && !failed);
+        root.classList.toggle('is-ready', ready);
+        // the bar: half our own downloads (bytes), half the engine's phases (three.js + game setup), so it neither jumps at the end nor sits still
+        var f = ready ? 1 : 0.5 * preFraction() + 0.5 * engF;
+        if (f > shown) shown = Math.min(1, f);
+        var has = shown > 0.001, pct = has ? ' ' + Math.floor(shown * 100) + '%' : '';
+        var name = c ? c.name : 'your roller';
+        var slow = !ready && performance.now() - bootAt > 30000;
+        var t = failed ? 'Could not load the game. Check your connection.'
+            : going || (ready && api.confirmed) ? 'Here we go!'
+            : api.confirmed ? 'Rolling in as ' + name + ' as soon as it is ready&hellip;' + pct
+            : ready ? 'All set. Take your time, then roll!'
+            : slow ? 'Still loading (slow connection?)&hellip;' + pct
+            : 'Getting the stage ready&hellip;' + pct;
+        root.classList.toggle('is-indet', !has);
+        if (has) bar.style.transform = 'scaleX(' + shown.toFixed(3) + ')';
+        if (t !== lastTxt) { msg.innerHTML = t; lastTxt = t; }
+        var gt = failed ? 'TRY AGAIN' : api.confirmed ? (ready ? 'GO!' : 'GET READY') : "LET'S ROLL!";
+        if (goBtn.textContent !== gt) goBtn.textContent = gt;
+    }
+    function notify() { for (var i = 0; i < subs.length; i++) try { subs[i](api); } catch (e) { /* ignore */ } }
+    // a card, the arrows, the d-pad: SELECT only (the card's line shows). The game previews the selected animal on the ball once the pick has rested (CharacterSelect.ts), so it is usually there by the time ROLL is pressed.
+    function select(id) {
+        if (gone || going || api.confirmed || IDS.indexOf(id) < 0) return;
+        api.pick = id;
+        render();
+        notify();
+    }
+    function move(d) {
+        if (api.confirmed) return;
+        var i = (IDS.indexOf(api.pick) + d + IDS.length) % IDS.length;
+        select(IDS[i]);
+        if (!gone && cards[i]) try { cards[i].focus({ preventScroll: true }); } catch (e) { /* ignore */ }
+    }
+    // ROLL (the button, Enter / Space, gamepad A / Start, the automation): the only thing that starts. Game loaded: the game calls engine.startGame() right here, inside
+    // this gesture (fullscreen, analytics, audio unlock run as they do from the engine's Play button, which calls the same function). Still loading: lock in, do the
+    // gesture-bound part of Play now (fullscreen on phones), and the game calls engine.startGame() when loading completes.
+    function startPress(user) {
+        if (failed) { try { location.reload(); } catch (e) { /* ignore */ } return; }
+        if (gone || going) return;
+        api.confirmed = true;
+        render();
+        var started = false;
+        if (typeof api.start === 'function') try { started = api.start() === true; } catch (e) { /* the game logs it */ }
+        if (!started) { launched = true; gestureStart(); }
+        notify();
+    }
+    function hasActivation() {
+        var ua = navigator.userActivation;
+        if (ua && typeof ua.isActive === 'boolean') return ua.isActive;
+        return typeof document.hasTransientUserActivation === 'boolean' ? document.hasTransientUserActivation : false;
+    }
+    // what the engine's Play does inside the tap on phones: fullscreen (only with user activation, not when already fullscreen)
+    function gestureStart() {
+        try {
+            if (!isMobile()) return;
+            if (document.fullscreenElement || document.webkitFullscreenElement) return;
+            if (!hasActivation()) return;
+            var el = document.documentElement, rq = el.requestFullscreen || el.webkitRequestFullscreen;
+            if (!rq) return;
+            var p = rq.call(el);
+            if (p && p.catch) p.catch(function () {});
+        } catch (e) { /* ignore */ }
+    }
+    function dismiss(fromSafetyNet) {
+        if (gone) return;
+        gone = true;
+        window.removeEventListener('keydown', onKey, true);
+        root.classList.add('tor-out');
+        setTimeout(drop, 350);
+        if (fromSafetyNet) console.warn('[pick] the game never took this screen over: the engine\'s own start screen is showing');
+    }
+    // a card selects (and shows its line); the ROLL button is the play button. (When the game could not be loaded, ROLL reloads the page.)
+    root.addEventListener('click', function (e) {
+        var c = e.target && e.target.closest ? e.target.closest('.tor-card, .tor-go') : null;
+        if (!c) return;
+        if (c.classList.contains('tor-go')) startPress(true);
+        else select(c.getAttribute('data-id'));
+    });
+    function onKey(e) {
+        if (gone || e.altKey || e.ctrlKey || e.metaKey) return;
+        var k = e.code || e.key, used = true;
+        if (k === 'ArrowLeft' || k === 'KeyA' || k === 'ArrowUp' || k === 'KeyW') move(-1);
+        else if (k === 'ArrowRight' || k === 'KeyD' || k === 'ArrowDown' || k === 'KeyS') move(1);
+        else if (k === 'Enter' || k === 'NumpadEnter' || k === 'Space') { if (!e.repeat) startPress(true); }
+        else used = false;
+        if (used) { e.preventDefault(); e.stopPropagation(); }
+    }
+    window.addEventListener('keydown', onKey, true);
+    // gamepad: d-pad / left stick to choose, A or Start to roll
+    var hasPad = false, padNext = 0, padHeld = {};
+    window.addEventListener('gamepadconnected', function () { hasPad = true; });
+    function pollPads(now) {
+        var pads = navigator.getGamepads ? navigator.getGamepads() : [];
+        for (var i = 0; i < pads.length; i++) {
+            var g = pads[i];
+            if (!g) continue;
+            var b = g.buttons || [], x = (g.axes && g.axes[0]) || 0;
+            var l = (b[14] && b[14].pressed) || x < -0.6, r = (b[15] && b[15].pressed) || x > 0.6;
+            var a = !!((b[0] && b[0].pressed) || (b[9] && b[9].pressed));
+            if ((l || r) && now >= padNext) { move(l ? -1 : 1); padNext = now + 260; }
+            if (!l && !r) padNext = 0;
+            if (a && !padHeld[i]) startPress(true);
+            padHeld[i] = a;
+        }
+    }
+    var stuckSince = 0, lastLoop = 0;
+    function loop(now) {
+        if (gone) return;
+        if (hasPad) pollPads(now);
+        // the tail (GPU warm-up, audio) reports no bytes: past 85 %, ease slowly toward 97 % while nothing new arrives, so the bar never sits still for seconds
+        var dt = lastLoop ? Math.min(100, now - lastLoop) : 0;
+        lastLoop = now;
+        if (!ready && !going && shown >= 0.85 && shown < 0.97) { shown = Math.min(0.97, shown + (0.97 - shown) * dt / 4000); render(); }
+        // safety net: the engine finished loading but the game never took this screen over (a stale page or a boot error): step aside for the engine's own start screen
+        if (engF >= 1 && !api.attached) {
+            if (!stuckSince) stuckSince = now;
+            else if (now - stuckSince > 3000) { dismiss(true); return; }
+        }
+        requestAnimationFrame(loop);
+    }
+    render();
+    // WHEN our own downloads start. This screen sits after the 2.5 MB game bundle, so it exists when the libraries (three.js from esm.sh, 2 MB) begin to load; downloads started now
+    // fight them for the same link and push the engine's start back by about as much as they gain (measured on the published page, 4G: the engine started ~1 s later and the
+    // game was ready 0.2 s LATER than without the screen). The engine reports its first progress the moment the libraries are all here and it starts executing: from then on
+    // the link is free while the engine's CPU-bound boot runs (~0.6 s), which is what the stage and sky download can hide behind. A timer covers an engine that never reports.
+    // (?prefetch=now starts at once, ?prefetch=off never starts by itself: for tuning.)
+    var engineSeen = false;
+    var pfMode = q.get('prefetch');
+    function engineUp() { if (!engineSeen && pfMode !== 'off') { engineSeen = true; startPrefetch(); } }
+    if (pfMode === 'now') startPrefetch();
+    else if (pfMode !== 'off') setTimeout(engineUp, 12000);
+    requestAnimationFrame(loop);
+})();
+</script>
+<!-- tor-rs:body:end -->

@@ -1,9 +1,12 @@
 {
-  "gameId": "TPLSTANDARD3",
-  "gameName": "Gem Island",
-  "gameDescription": "Collect every gem on the island before the timer runs out. An example game built on the Bitmagic engine.",
+  "gameId": "YICXH0E5EA6M",
+  "gameGenre": "Voxel",
+  "gameName": "Trick or Roll",
+  "gameDescription": "Tilt the world, not the ball. Guide a golden hamster in a glass ball across a floating Halloween harvest world: narrow plank walkways, spinning scarecrow discs, jack-o'-lantern bumpers, conveyor belts and launch ramps drifting in a violet twilight sky. Collect wrapped candy, roll through the glowing jack-o'-lantern goal before the 60-second timer runs out, and don't fall off the world. A comic-book take on the arcade tilt-and-roll classic.",
   "characterUrl": "",
-  "thumbnailUrl": "engine-asset:templates/thumbnails/standard-3d-v1.jpg",
+  "thumbnailUrl": "https://beta.portal.bitmagic.cloud/worlds/v3/YICXH0E5EA6M/1778159929458-screenshot-template-YICXH0E5EA6M-1778159931364.jpg",
   "environmentObjectsGeneratedProcedurally": false,
-  "primaryPlatform": "desktop"
+  "primaryPlatform": "desktop",
+  "artStyle": "low-poly",
+  "physicsMode": "none"
 }
