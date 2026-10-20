@@ -1,9 +1,10 @@
 name: Deploy to GitHub Pages
 
 # Builds the game with the open engine (the npm package @bitmagicai/aitopia) and deploys it to
-# GitHub Pages. Manual while the repository is private (Pages serves a free organization's public
-# repositories only); add `push: branches: [main]` here when it goes public.
+# GitHub Pages on every push to main, or by hand (Actions → "Deploy to GitHub Pages" → Run workflow).
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:

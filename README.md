@@ -54,7 +54,7 @@ npx aitopia build site
 
 `site/` is a static site: `index.html` plus the engine's files beside it, so any static host serves it, GitHub
 Pages included. `.github/workflows/pages.yml` does the same on GitHub and deploys the result to
-<https://bitmagicai.github.io/example-game/> (Actions → "Deploy to GitHub Pages" → Run workflow).
+<https://bitmagicai.github.io/example-game/> on every push to `main`.
 
 The game's own content (the 30 stage models, the four animals, the music, the skies and the achievement icons) is
 not in this repository: `world.json` names each file by its URL on `bitmagic.ai`, which serves them to any site.
