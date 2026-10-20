@@ -10,16 +10,17 @@ import { batchStage, lakeParam } from './StageBatch.js';
 import { expandFlatMeshes } from './StageExpand.js';
 import { isWebGpuActive } from 'engine/render/backend/RendererType.js';
 import { activeDeviceQualityTier } from 'engine/quality/DeviceQuality.js';
+import { resolveGameAssetUrl } from 'engine/runtime/hosting.js';
 import { lookForStage, type StageLook } from './looks.js';
 import { buildRouteLights } from './RouteLights.js';
 
-/** Where a stage GLB comes from: the registered asset (published games) or the dev-served file. */
+/** Where a stage GLB comes from: the asset world.json registers under its name, else the game's own assets/stages/<name>.glb. */
 export function stageUrl(gameData: GameData | null, name: string): string {
     // ?stagedir=build/level loads a freshly built stage straight from the build folder (tools/ only;
     // does not touch src/, so the creator's dev tab is never reloaded by a stage author's test run)
     const dir = new URLSearchParams(window.location.search).get('stagedir');
     if (dir) return `/${dir.replace(/^\/+|\/+$/g, '')}/${name}.glb`;
-    return getAssetUrlByName(gameData, name) ?? `/src/work/stages/${name}.glb`;
+    return getAssetUrlByName(gameData, name) ?? resolveGameAssetUrl(`game-asset:stages/${name}.glb`);
 }
 
 export interface LoadedStage {

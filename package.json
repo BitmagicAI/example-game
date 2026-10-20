@@ -4,7 +4,7 @@
   "type": "module",
   "dependencies": {
     "@bitmagic/engine-assets": "npm:@bitmagicai/engine-assets@^1.0.1",
-    "@bitmagicai/aitopia": "^1.0.0-dev.2"
+    "@bitmagicai/aitopia": "^1.0.0-dev.3"
   },
   "scripts": {
     "dev": "aitopia dev",

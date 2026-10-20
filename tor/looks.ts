@@ -120,7 +120,6 @@ export const NIGHT_PATCH: StageLook = {
     grade: { saturation: 1.28, contrast: 1.16, temperature: 0.04, tint: 0.06 },
     exposure: 1.1,
     bloom: { strength: 0.5, radius: 0.5, threshold: 0.85 },
-    sky: '/src/work/looks/sky-patch-night.webp',
     palette: {
         grass: '#38124e', grass_dark: '#260a38', leaf: '#2a2a5e', stem: '#2f6a3c', moss: '#22164a',
         dirt: '#2a1238', rock: '#321442', rock_dark: '#1c0828',

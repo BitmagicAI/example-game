@@ -24,7 +24,9 @@ const pick = (name) => { const m = src.match(new RegExp(`<!-- tor-rs:${name}:beg
 const fail = (m) => { console.error('ERROR: ' + m); process.exit(1); };
 
 // the assets the screen prefetches: by NAME (the game asks for stages and animals by name), sized from world.json (the real size replaces it when the response arrives)
-const asset = (name) => { const a = world.assets.find((x) => x.name === name || x.id === name); if (!a?.url) fail(`world.json has no asset "${name}"`); return { u: a.url, w: a.size || 300000 }; };
+// a game-asset: URL is baked as the engine resolves it (engine/runtime/hosting.ts resolveGameAssetUrl): the screen's script fetches it as it is, and the game looks the bytes up by that URL
+const resolved = (url) => (url.startsWith('game-asset:') ? `./assets/${url.slice('game-asset:'.length).replace(/^\/+/, '')}` : url);
+const asset = (name) => { const a = world.assets.find((x) => x.name === name || x.id === name); if (!a?.url) fail(`world.json has no asset "${name}"`); return { u: resolved(a.url), w: a.size || 300000 }; };
 const urls = { menuStage: asset(ROSTER.menuStage), firstStage: asset(ROSTER.firstStage) };
 const cfg = { saveKey: 'trickorroll:v1', characters: ROSTER.characters.map(({ id, name, blurb, tint }) => ({ id, name, blurb, tint })), urls };
 

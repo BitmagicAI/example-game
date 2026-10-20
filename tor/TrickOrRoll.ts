@@ -27,6 +27,7 @@ import { PauseExtras } from './PauseExtras.js';
 import { PerfProbe } from './PerfProbe.js';
 import { RenderTune } from './RenderTune.js';
 import { isMobileRuntime } from 'engine/runtime/isMobileRuntime.js';
+import { resolveGameAssetUrl } from 'engine/runtime/hosting.js';
 import { safeInsets } from './safeArea.js';
 
 /**
@@ -318,7 +319,9 @@ export class TrickOrRoll {
         // A world without a panorama of its own (the Pumpkin Patch) uses world.json's sky, the one loaded at boot. It must be put BACK when the
         // previous stage swapped in another world's: before this, a Beginner stage played after a Graveyard or Workshop one kept their sky.
         const base = (this.gameData as unknown as { worldProfileData?: { skyboxUrl?: string } } | null)?.worldProfileData?.skyboxUrl ?? null;
-        const sky = look?.sky ?? w.sky.url ?? base;
+        // worlds.ts and looks.ts name their skies by game-asset: URL, and the engine resolves only world.json's
+        const named = look?.sky ?? w.sky.url ?? base;
+        const sky = named === null ? null : resolveGameAssetUrl(named);
         if (sky && sky !== (this.skyUrl ?? base)) { this.skyUrl = sky; void this.hooks.setSky?.(sky).then(() => shapeSky(this.engine.scene!, w.sky.shape)); }
         else shapeSky(this.engine.scene!, w.sky.shape);
         this.ball.setLook({ glass: look?.glass ?? null, character: look?.character ?? null, ground: look?.ground ?? null });

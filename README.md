@@ -16,8 +16,9 @@ run, build or host it.
 | `Game.ts` | The `Game` class the engine constructs: the sky and the ambient light, then everything else handed to `TrickOrRoll` |
 | `tor/` | The game: `TrickOrRoll.ts` (the flow from menu to stage to result), the stage, ball, camera, input, HUD, menus, items, effects and sound |
 | `sim/` | The ball physics: a fixed 60 Hz simulation in the tilting stage's frame, against the stage's triangles. No rigid-body engine |
+| `assets/` | The game's own files: the 30 stages, the four animals, the music, the skies, the achievement icons and the cover |
 | `tools/pick-screen/` | The "Pick your roller" first screen and the script that builds it into `tor/PickScreenMarkup.ts` ([its README](tools/pick-screen/README.md)) |
-| `world.json`, `game.json` | The stages, animals, music and sky as assets, the lighting, the achievements, and the game's settings |
+| `world.json`, `game.json` | The stages, animals, music and sky as assets (named `game-asset:<path>`, a file in `assets/`), the lighting, the achievements, and the game's settings |
 | `GAME-DESIGN.md` | The design: rules, controls, courses, the look |
 | `package.json`, `tsconfig.json` | The engine as an npm package, and the TypeScript setup it provides |
 
@@ -52,10 +53,18 @@ away, `?renderer=webgl` or `?renderer=webgpu` picks the renderer.
 npx aitopia build site
 ```
 
-`site/` is a static site: `index.html` plus the engine's files beside it, so any static host serves it, GitHub
-Pages included. `.github/workflows/pages.yml` does the same on GitHub and deploys the result to
+`site/` is a static site: `index.html`, the engine's files and a copy of `assets/` beside it. It talks to no
+other host, so any static host serves it, GitHub Pages included. `.github/workflows/pages.yml` does the same on GitHub and deploys the result to
 <https://bitmagicai.github.io/example-game/> on every push to `main`.
 
-The game's own content (the 30 stage models, the four animals, the music, the skies and the achievement icons) is
-not in this repository: `world.json` names each file by its URL on `bitmagic.ai`, which serves them to any site.
-The build lists those URLs as it runs.
+## The game's own files
+
+Everything the game loads besides its code is in `assets/` (34 MB): `world.json` names each file as
+`game-asset:<path>`, such as `game-asset:stages/b01.glb` for `assets/stages/b01.glb`. The engine loads them
+from beside the page, `npx aitopia dev` serves them there, and `npx aitopia build` copies the folder into the
+site, stopping if `world.json` names a file the folder does not hold. Code that fetches a file itself resolves
+the URL first with `resolveGameAssetUrl` (`engine/runtime/hosting.js`), as `tor/TrickOrRoll.ts` does for the
+skies in `tor/worlds.ts`.
+
+The models are stored as plain `.glb` files, already compressed inside (meshopt). GitHub Pages gzips them on the
+way, which brings the 30 stages and four animals to about 15 MB on the wire.

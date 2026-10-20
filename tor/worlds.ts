@@ -55,7 +55,7 @@ export const WORLDS: Record<string, WorldTheme> = {
         grade: { saturation: 1.1, contrast: 1.12, temperature: -0.12, tint: 0.02 },
         exposure: 1.15,
         bloom: { strength: 0.45, radius: 0.55, threshold: 0.92 },
-        sky: { url: 'https://forged-assets.bitmagic.ai/images/580057a8-9028-45f1-bba4-37eeb9043fd4/image.webp', shape: { paintedHorizon: 0.78, horizonDeg: 16, yaw: 0 } },
+        sky: { url: 'game-asset:sky/graveyard.webp', shape: { paintedHorizon: 0.78, horizonDeg: 16, yaw: 0 } },
         music: 'music-graveyard',
     },
     workshop: {
@@ -69,7 +69,7 @@ export const WORLDS: Record<string, WorldTheme> = {
         grade: { saturation: 1.18, contrast: 1.15, temperature: -0.05, tint: 0.08 },
         exposure: 1.2,
         bloom: { strength: 0.55, radius: 0.6, threshold: 0.88 },
-        sky: { url: 'https://forged-assets.bitmagic.ai/images/062def2e-897d-4694-9098-1de0c5d4dd70/image.webp', shape: { paintedHorizon: 0.78, horizonDeg: 16, yaw: 0 } },
+        sky: { url: 'game-asset:sky/workshop.webp', shape: { paintedHorizon: 0.78, horizonDeg: 16, yaw: 0 } },
         music: 'music-workshop',
     },
 };

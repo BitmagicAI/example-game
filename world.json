@@ -5,7 +5,7 @@
     "cameraMode": "third-person",
     "useFreeMouse": true,
     "hasPlayerCharacter": false,
-    "skyboxUrl": "https://forged-assets.bitmagic.ai/images/c9d589b7-76e7-4873-aefe-3fdb8f71110b/image.webp",
+    "skyboxUrl": "game-asset:sky/patch.webp",
     "groundWorldSizeX": 128,
     "groundWorldSizeZ": 128,
     "lightingConfig": {
@@ -66,7 +66,7 @@
     },
     "hud": {
       "startScreen": {
-        "imageUrl": "https://forged-assets.bitmagic.ai/images/d5919b9a-43eb-4551-9b0a-a875eb84aa24/image.webp"
+        "imageUrl": "game-asset:cover-art.webp"
       },
       "theme": {
         "name": "Trick or Roll",
@@ -106,7 +106,7 @@
         "description": "Roll through your first goal gate.",
         "xp": 25,
         "hidden": false,
-        "imageUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791399950758-achievement-first_goal-49eb5af6.png"
+        "imageUrl": "game-asset:achievements/first-goal.webp"
       },
       {
         "achievementId": "sweet_tooth",
@@ -114,7 +114,7 @@
         "description": "Collect 100 candies in one Challenge run to earn an extra life.",
         "xp": 50,
         "hidden": false,
-        "imageUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791399953624-achievement-sweet_tooth-eee731e5.png"
+        "imageUrl": "game-asset:achievements/sweet-tooth.webp"
       },
       {
         "achievementId": "photo_finish",
@@ -122,7 +122,7 @@
         "description": "Reach a goal with less than three seconds left on the clock.",
         "xp": 50,
         "hidden": true,
-        "imageUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791399956259-achievement-photo_finish-a02a4d1b.png"
+        "imageUrl": "game-asset:achievements/photo-finish.webp"
       },
       {
         "achievementId": "patch_cleared",
@@ -130,7 +130,7 @@
         "description": "Clear all ten Beginner stages in one Challenge run.",
         "xp": 75,
         "hidden": false,
-        "imageUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791399959011-achievement-patch_cleared-89c0df70.png"
+        "imageUrl": "game-asset:achievements/patch-cleared.webp"
       },
       {
         "achievementId": "graveyard_cleared",
@@ -138,7 +138,7 @@
         "description": "Clear all ten Advanced stages in one Challenge run.",
         "xp": 100,
         "hidden": false,
-        "imageUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791399961678-achievement-graveyard_cleared-6ed51604.png"
+        "imageUrl": "game-asset:achievements/graveyard-cleared.webp"
       },
       {
         "achievementId": "workshop_cleared",
@@ -146,7 +146,7 @@
         "description": "Clear all ten Expert stages in one Challenge run.",
         "xp": 125,
         "hidden": false,
-        "imageUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791399964903-achievement-workshop_cleared-50b42dba.png"
+        "imageUrl": "game-asset:achievements/workshop-cleared.webp"
       },
       {
         "achievementId": "not_a_scratch",
@@ -154,7 +154,7 @@
         "description": "Clear a whole course in Challenge mode without losing a life.",
         "xp": 75,
         "hidden": false,
-        "imageUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791399967567-achievement-not_a_scratch-b5c2a9c6.png"
+        "imageUrl": "game-asset:achievements/not-a-scratch.webp"
       }
     ]
   },
@@ -162,7 +162,7 @@
     {
       "id": "asset_1790637762953_w4k8vi",
       "name": "hamster",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102620871-hamster-br.glb",
+      "url": "game-asset:animals/hamster.glb",
       "type": "glb",
       "prompt": "cute hamster",
       "description": "A cute unclothed anthropomorphic golden hamster with golden cream fur, big round cheeks, tiny ears, white belly and tiny natural tail",
@@ -172,17 +172,14 @@
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:41:46.043Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790728905165-hamster.glb",
         "sourceName": "hamster.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790728905165-hamster.glb",
       "targetHeight": 2
     },
     {
       "id": "img-cover_art-1790651910874",
       "name": "cover_art",
-      "url": "https://forged-assets.bitmagic.ai/images/d5919b9a-43eb-4551-9b0a-a875eb84aa24/image.webp",
-      "screenshotUrl": "https://forged-assets.bitmagic.ai/images/d5919b9a-43eb-4551-9b0a-a875eb84aa24/image.webp",
+      "url": "game-asset:cover-art.webp",
       "type": "image",
       "source": "generated",
       "prompt": "Low-poly art: flat-shaded polygon meshes with clean facets and hard edges, simple colour blocking, no visible cubes, no voxels.\nA low-poly game scene based on this game design:\nCover art for the arcade tilt-and-roll game TRICK OR ROLL. A cute golden hamster runs inside a big glass ball, front and centre, rolling down a lantern-lit wooden boardwalk that spirals around a giant glowing jack-o'-lantern in a floating Halloween harvest world: wrapped candies in the air, floating islands with pumpkins, hay bales and windmills, a huge harvest moon, twilight sky. Hand-inked comic-book art in the style of the reference image: bold black ink outlines, halftone dot shading, saturated pumpkin orange, candy pink and violet, warm glowing lantern light. Dynamic low camera, the hamster large and clearly readable, energetic and joyful, spooky-cute not scary. No text, no lettering, no logos, no interface.\n\nDepict the world and atmosphere as a single illustrated scene. Low-poly art with flat-shaded facets and hard edges on every object, no cubes, no voxels, rendered as a highly polished 3D scene with the craft of a Pixar-quality animated film, cinematic lighting that fits the scene, soft ambient occlusion, rich detail and expressive composition. Wordless illustration, no text, no title, no words, no letters, no logos, no UI.",
@@ -191,7 +188,7 @@
     {
       "id": "asset_1790641727412_6ap2k5",
       "name": "redpanda",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102623000-redpanda-br.glb",
+      "url": "game-asset:animals/redpanda.glb",
       "type": "glb",
       "prompt": "cute red panda",
       "description": "A cute unclothed anthropomorphic red panda with russet fur, cream face markings, dark paws, rounded ears and fluffy ringed tail",
@@ -201,16 +198,14 @@
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:41:48.067Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790728907133-redpanda.glb",
         "sourceName": "redpanda.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790728907133-redpanda.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790641730517_mnapr1",
       "name": "hedgehog",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102624938-hedgehog-br.glb",
+      "url": "game-asset:animals/hedgehog.glb",
       "type": "glb",
       "prompt": "cute hedgehog",
       "description": "A cute unclothed anthropomorphic European hedgehog with tan face and belly, tiny ears, compact rounded soft stylized brown quills on back, no oversized spikes, tiny natural tail",
@@ -220,16 +215,14 @@
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:41:51.045Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790728910268-hedgehog.glb",
         "sourceName": "hedgehog.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790728910268-hedgehog.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790641733716_ivk0ja",
       "name": "raccoon",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102626743-raccoon-br.glb",
+      "url": "game-asset:animals/raccoon.glb",
       "type": "glb",
       "prompt": "cute raccoon",
       "description": "A cute unclothed anthropomorphic raccoon with grey fur, dark eye mask, cream muzzle, rounded ears and striped fluffy tail",
@@ -239,16 +232,14 @@
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:41:54.746Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790728913364-raccoon.glb",
         "sourceName": "raccoon.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790728913364-raccoon.glb",
       "targetHeight": 2
     },
     {
       "id": "music-patch",
       "name": "Upbeat mischievous Halloween harvest fun, 126 bpm. Bouncy pizzicato strings and marimba, a playful clarinet melody, light hand percussion and tambourine, warm and whimsical, cheerful arcade tilt-maze game energy, catchy hook, seamless loop, no vocals.",
-      "url": "https://forged-assets.bitmagic.ai/music/2a0dd843-ac21-4c9f-8506-e1ad7343c4cc/music.opus",
+      "url": "game-asset:music/patch.opus",
       "type": "audio",
       "format": "opus",
       "prompt": "Upbeat mischievous Halloween harvest fun, 126 bpm. Bouncy pizzicato strings and marimba, a playful clarinet melody, light hand percussion and tambourine, warm and whimsical, cheerful arcade tilt-maze game energy, catchy hook, seamless loop, no vocals.",
@@ -260,7 +251,7 @@
     {
       "id": "music-graveyard",
       "name": "Mysterious playful moonlit graveyard groove, 112 bpm. Walking upright bass, harpsichord and celesta melody, spooky theremin-like synth accents, finger snaps and soft brushed drums, cool and sneaky but fun, seamless loop, no vocals.",
-      "url": "https://forged-assets.bitmagic.ai/music/a56d2f39-6e89-404f-a1b2-62387ea2006d/music.opus",
+      "url": "game-asset:music/graveyard.opus",
       "type": "audio",
       "format": "opus",
       "prompt": "Mysterious playful moonlit graveyard groove, 112 bpm. Walking upright bass, harpsichord and celesta melody, spooky theremin-like synth accents, finger snaps and soft brushed drums, cool and sneaky but fun, seamless loop, no vocals.",
@@ -272,7 +263,7 @@
     {
       "id": "music-workshop",
       "name": "Frantic energetic witch's workshop, 138 bpm. Bubbling analog synth arpeggios, pipe organ stabs, clockwork ticking percussion, driving snare, magical chimes, tense but fun, seamless loop, no vocals.",
-      "url": "https://forged-assets.bitmagic.ai/music/a30d3e1c-2e14-4df3-8315-3afb3025b3bc/music.opus",
+      "url": "game-asset:music/workshop.opus",
       "type": "audio",
       "format": "opus",
       "prompt": "Frantic energetic witch's workshop, 138 bpm. Bubbling analog synth arpeggios, pipe organ stabs, clockwork ticking percussion, driving snare, magical chimes, tense but fun, seamless loop, no vocals.",
@@ -284,451 +275,391 @@
     {
       "id": "asset_1790654230961_0x4yoe",
       "name": "b01",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102582096-b01-br.glb",
+      "url": "game-asset:stages/b01.glb",
       "type": "glb",
       "size": 206141,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:17:46.611Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727465888-b01.glb",
         "sourceName": "b01.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727465888-b01.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790654241107_1yafgl",
       "name": "b02",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102629692-b02-br.glb",
+      "url": "game-asset:stages/b02.glb",
       "type": "glb",
       "size": 311358,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:19:18.844Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727557938-b02.glb",
         "sourceName": "b02.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727557938-b02.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790654244350_j3e5iy",
       "name": "b03",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102632018-b03-br.glb",
+      "url": "game-asset:stages/b03.glb",
       "type": "glb",
       "size": 237919,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:19:20.405Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727559739-b03.glb",
         "sourceName": "b03.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727559739-b03.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790654246164_5hd2lv",
       "name": "b04",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102634782-b04-br.glb",
+      "url": "game-asset:stages/b04.glb",
       "type": "glb",
       "size": 323674,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:19:21.992Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727561305-b04.glb",
         "sourceName": "b04.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727561305-b04.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790654248634_u8h9s8",
       "name": "b05",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102638602-b05-br.glb",
+      "url": "game-asset:stages/b05.glb",
       "type": "glb",
       "size": 516445,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:19:23.623Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727562894-b05.glb",
         "sourceName": "b05.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727562894-b05.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790654251124_dcl887",
       "name": "b06",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102641300-b06-br.glb",
+      "url": "game-asset:stages/b06.glb",
       "type": "glb",
       "size": 298135,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:19:26.922Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727566170-b06.glb",
         "sourceName": "b06.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727566170-b06.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790654253214_p13i06",
       "name": "b07",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102644913-b07-br.glb",
+      "url": "game-asset:stages/b07.glb",
       "type": "glb",
       "size": 398760,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:19:30.453Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727569589-b07.glb",
         "sourceName": "b07.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727569589-b07.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790654255431_9fopqw",
       "name": "b08",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102648393-b08-br.glb",
+      "url": "game-asset:stages/b08.glb",
       "type": "glb",
       "size": 415862,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:19:33.736Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727573019-b08.glb",
         "sourceName": "b08.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727573019-b08.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790654257761_k0puk0",
       "name": "b09",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102650951-b09-br.glb",
+      "url": "game-asset:stages/b09.glb",
       "type": "glb",
       "size": 258010,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:19:36.700Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727575998-b09.glb",
         "sourceName": "b09.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727575998-b09.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790654259878_ft81v1",
       "name": "b10",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102656915-b10-br.glb",
+      "url": "game-asset:stages/b10.glb",
       "type": "glb",
       "size": 774145,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:19:40.159Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727579368-b10.glb",
         "sourceName": "b10.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727579368-b10.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790654262250_t4tofb",
       "name": "a01",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102661491-a01-br.glb",
+      "url": "game-asset:stages/a01.glb",
       "type": "glb",
       "size": 463587,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:19:43.532Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727582775-a01.glb",
         "sourceName": "a01.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727582775-a01.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790654264556_m6fhf9",
       "name": "a03",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102665075-a03-br.glb",
+      "url": "game-asset:stages/a03.glb",
       "type": "glb",
       "size": 384244,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:19:47.034Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727586296-a03.glb",
         "sourceName": "a03.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727586296-a03.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790654266718_g2h5l8",
       "name": "a04",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102668913-a04-br.glb",
+      "url": "game-asset:stages/a04.glb",
       "type": "glb",
       "size": 359427,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:19:51.349Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727590627-a04.glb",
         "sourceName": "a04.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727590627-a04.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790654646115_mg4uir",
       "name": "a02",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102675632-a02-br.glb",
+      "url": "game-asset:stages/a02.glb",
       "type": "glb",
       "size": 641061,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:19:55.307Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727594533-a02.glb",
         "sourceName": "a02.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727594533-a02.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790654780596_0tekq0",
       "name": "a05",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102678934-a05-br.glb",
+      "url": "game-asset:stages/a05.glb",
       "type": "glb",
       "size": 314672,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:19:58.769Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727597967-a05.glb",
         "sourceName": "a05.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727597967-a05.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790657336375_nfeglk",
       "name": "a06",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102681848-a06-br.glb",
+      "url": "game-asset:stages/a06.glb",
       "type": "glb",
       "size": 278294,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:02.309Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727601537-a06.glb",
         "sourceName": "a06.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727601537-a06.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790657552956_czoeln",
       "name": "a07",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102687957-a07-br.glb",
+      "url": "game-asset:stages/a07.glb",
       "type": "glb",
       "size": 614643,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:05.409Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727604599-a07.glb",
         "sourceName": "a07.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727604599-a07.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790658292266_y5q3ij",
       "name": "a08",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102692704-a08-br.glb",
+      "url": "game-asset:stages/a08.glb",
       "type": "glb",
       "size": 469864,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:08.961Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727608095-a08.glb",
         "sourceName": "a08.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727608095-a08.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790660694681_9x4uit",
       "name": "a09",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102695541-a09-br.glb",
+      "url": "game-asset:stages/a09.glb",
       "type": "glb",
       "size": 217942,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:12.751Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727612103-a09.glb",
         "sourceName": "a09.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727612103-a09.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790661051477_lowtiz",
       "name": "a10",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102701789-a10-br.glb",
+      "url": "game-asset:stages/a10.glb",
       "type": "glb",
       "size": 786641,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:16.345Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727615516-a10.glb",
         "sourceName": "a10.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727615516-a10.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790662056080_qmzmic",
       "name": "e01",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102706334-e01-br.glb",
+      "url": "game-asset:stages/e01.glb",
       "type": "glb",
       "size": 407058,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:19.642Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727618193-e01.glb",
         "sourceName": "e01.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727618193-e01.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790664092280_yhttto",
       "name": "e02",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102709978-e02-br.glb",
+      "url": "game-asset:stages/e02.glb",
       "type": "glb",
       "size": 369893,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:22.934Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727622151-e02.glb",
         "sourceName": "e02.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727622151-e02.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790664094325_pphllf",
       "name": "e03",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102715423-e03-br.glb",
+      "url": "game-asset:stages/e03.glb",
       "type": "glb",
       "size": 611934,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:26.548Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727625772-e03.glb",
         "sourceName": "e03.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727625772-e03.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790666450640_h1a4ud",
       "name": "e04",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102719049-e04-br.glb",
+      "url": "game-asset:stages/e04.glb",
       "type": "glb",
       "size": 311032,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:30.433Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727629689-e04.glb",
         "sourceName": "e04.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727629689-e04.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790667415776_85w465",
       "name": "e05",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102723186-e05-br.glb",
+      "url": "game-asset:stages/e05.glb",
       "type": "glb",
       "size": 404871,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:33.934Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727633184-e05.glb",
         "sourceName": "e05.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727633184-e05.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790667417701_ckd0j4",
       "name": "e06",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102727233-e06-br.glb",
+      "url": "game-asset:stages/e06.glb",
       "type": "glb",
       "size": 357699,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:36.890Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727636208-e06.glb",
         "sourceName": "e06.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727636208-e06.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790669721913_eocx2d",
       "name": "e07",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102730826-e07-br.glb",
+      "url": "game-asset:stages/e07.glb",
       "type": "glb",
       "size": 427131,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:40.520Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727639715-e07.glb",
         "sourceName": "e07.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727639715-e07.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790670389228_si9uug",
       "name": "e08",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102734590-e08-br.glb",
+      "url": "game-asset:stages/e08.glb",
       "type": "glb",
       "size": 346914,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:43.307Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727642560-e08.glb",
         "sourceName": "e08.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727642560-e08.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790671097077_66uyec",
       "name": "e09",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102738195-e09-br.glb",
+      "url": "game-asset:stages/e09.glb",
       "type": "glb",
       "size": 361000,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:44.936Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727644205-e09.glb",
         "sourceName": "e09.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727644205-e09.glb",
       "targetHeight": 2
     },
     {
       "id": "asset_1790673204380_fu449y",
       "name": "e10",
-      "url": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1791102741158-e10-br.glb",
+      "url": "game-asset:stages/e10.glb",
       "type": "glb",
       "size": 337616,
       "production": {
         "method": "uploaded",
         "at": "2026-09-30T00:20:46.577Z",
-        "sourceUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727645848-e10.glb",
         "sourceName": "e10.glb"
       },
-      "sourceGlbUrl": "https://bitmagic.ai/worlds/v3/BBUJYDOT4LPW/1790727645848-e10.glb",
       "targetHeight": 2
     }
   ],
